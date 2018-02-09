@@ -1,0 +1,50 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>Eğitim</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+
+  <body>
+  <div class="container">
+  <div th:replace="fragments/header :: header"></div>
+  <div class="row" style="margin-top: 50px">
+  <br><br>
+    <table class="table table-striped">
+    <tr>
+        <th >TweetId</th> 
+        <th >Tweet</th>
+        <th >Sil</th>
+        <th >Duygu Kararı</th>
+        <th >Kategori kararı</th>
+        
+    </tr>
+    <tr th:each="item : ${list}">
+        <td th:text="${item.tweetId}"></td> 
+        <td  th:text="${item.tweetText}"></td>
+        <td>
+        <form th:action="@{'/twitter/delete/'+${item.tweetId}}" th:method="GET">
+        <button type="submit"  class="btn-danger" name="Sil">Sil</button>
+        </form>
+        </td> 
+        <td><a href="#" th:href="@{'/twitter/duygukarar/'+${item.tweetId}}">Duygu kararı için tıkla!</a></td>
+        <td><a href="#" th:href="@{'/twitter/kategorikarar/'+${item.tweetId}}">Kategori kararı için tıkla!</a></td>
+    </tr>
+</table>
+</div>
+</div>
+
+  <br><br>
+  <div class="container">
+  <div th:replace="fragments/footer :: footer"></div>
+  <div class="row" style="margin-top: 50px">
+  </div>
+  </div>
+  </body>
+
+</html>

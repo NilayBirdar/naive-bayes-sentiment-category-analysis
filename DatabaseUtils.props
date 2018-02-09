@@ -1,0 +1,2 @@
+ jdbcDriver=com.mysql.jdbc.Driver
+ jdbcURL=jdbc:mysql://localhost:3306/springbootdb

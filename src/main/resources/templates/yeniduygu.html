@@ -1,0 +1,52 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>Duygu Degistir</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+
+  <body>
+  <div>
+  <div class="container">
+  <div th:replace="fragments/header :: header"></div>
+  <div class="row" style="margin-top: 50px">
+  <form th:action="@{/twitter/duygudegistir}" th:object="${tweet}" th:method="POST">
+    <table class="table table-striped">
+    <tr>
+       <th >TweetId</th> 
+        <th>Tweet</th>
+        <th>Analiz</th>       
+        <th >Yeni Duygu</th>
+    </tr>
+    <tr >
+        <td><input type="hidden" th:field="*{tweetId}" /><label  th:text="*{tweetId}"></label></td> 
+        <td><label  th:text="*{tweetText}"></label></td>
+        <td>  
+        <div th:switch="${tweet.duyguId}">
+  			<label th:case="1">Olumlu</label>
+  			<label th:case="0">Nötr</label>
+ 	 		<label th:case="-1">Olumsuz</label>
+		</div> </td>   
+
+        <td><select th:field="*{duyguId}">
+	    	           <option  th:value="1" th:text="Olumlu"></option>
+	    	           <option  th:value="0" th:text="Notr"></option>
+	    	           <option  th:value="-1" th:text="Olumsuz"></option>
+	     </select>
+        </td> 
+    </tr>
+ </table>
+ <button type="submit" class="btn-success">İşle</button>
+ </form>
+ </div>
+ </div>
+ </div>
+ 
+  </body>
+
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+  <head >
+    <title>Analiz</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+  
+  <body>
+  <div class="container">
+  <div th:replace="fragments/header :: header"></div>
+  <div class="row" style="margin-top: 50px">
+  <br><br>
+  
+  <div id="container" style="background-color: white !important;">
+  <div class="row"> 
+   <div class="col-sm-4">
+   <canvas id="sentimentChart" width="200" height="200"></canvas>
+   </div>
+   <div class="col-sm-4">
+   <canvas id="categoryChart" width="200" height="200"></canvas>
+   </div>
+ </div>
+   <br><br><hr><br><br>
+ <div class="row">
+   <div class="col-sm-4">
+   <canvas id="sentimentChartCategory1" width="200" height="200"></canvas>
+   </div>    
+   <div class="col-sm-4">
+   <canvas id="sentimentChartCategory2" width="200" height="200"></canvas>
+   </div>  
+   <div class="col-sm-4">
+   <canvas id="sentimentChartCategory3" width="200" height="200"></canvas>
+   </div>
+ </div>  
+   <br><br><hr noshade><br><br>
+ <div class="row">  
+   <div class="col-sm-4">
+   <canvas id="sentimentChartCategory4" width="200" height="200"></canvas>
+   </div>
+   <div class="col-sm-4">
+   <canvas id="sentimentChartCategory6" width="200" height="200"></canvas>
+   </div>
+   <div class="col-sm-4">
+   <canvas id="sentimentChartCategory8" width="200" height="200"></canvas>
+   </div>
+ </div>
+   <br><br><hr noshade><br><br>
+ <div class="row"> 
+   <div class="col-sm-4">
+   <canvas id="sentimentChartCategory7" width="200" height="200"></canvas>
+   </div>
+   <div class="col-sm-4">
+   <canvas id="sentimentChartCategory5" width="200" height="200"></canvas>
+   </div>
+   <div class="col-sm-4">
+   <canvas id="sentimentChartCategory0" width="200" height="200"></canvas>
+   </div>
+ </div>
+ </div> 
+ <br><br>
+ <button class="info" onclick="takeScreenShot()" >Snapshot</button>
+ 
+ 
+  <script type="text/javascript">
+  $.get("http://localhost:8080/sentimentChart", function(data, status){
+	  var ctx = document.getElementById("sentimentChart").getContext('2d');
+	  var SentimentChart = new Chart(ctx, {
+		    type: 'polarArea',
+		    data: {
+		        datasets: [{
+		            data: data.sentimentValues,
+		            backgroundColor: data.sentimentColors
+		        }],
+
+		        labels:data.sentimentLabels
+		    },
+		    options: {
+		        title: {
+		            display: true,
+		            text: 'Duygu Analizi Grafiği'
+		        }
+		    }
+		});
+	  
+  });
+  
+  $.get("http://localhost:8080/categoryChart", function(data, status){
+	  var ctx2 = document.getElementById("categoryChart").getContext('2d');
+	  var KategoriChart = new Chart(ctx2, {
+		    type: 'bar',
+		    data: {
+		    	
+		        datasets: [{
+		            data : data.categoryValues,
+		            fill: true,
+		            label: 'Kategoriler',
+		            backgroundColor: data.categoryColors
+		        }],
+
+		        labels:data.categoryLabels
+		    },
+		    options: {
+		        title: {
+		            display: true,
+		            text: 'Kategori Analizi Grafiği'
+		        }
+		    }
+
+		});
+  });
+  
+  $.get("http://localhost:8080/sentimentChartCategory1", function(data, status){
+	  var ctx = document.getElementById("sentimentChartCategory1").getContext('2d');
+	  var EkonomiChart = new Chart(ctx, {
+		    type: 'doughnut',
+		    data: {
+		        datasets: [{
+		            data: data.values,
+		            backgroundColor: data.colors,
+		            label: 'Ekonomi'
+		        }],
+
+
+		        labels:data.labels
+		    },
+		    options: {
+		        title: {
+		            display: true,
+		            text: 'Ekonomi kategorisinin duygu analizi'
+		        }
+		    }
+
+		});
+	  
+  });
+  
+  $.get("http://localhost:8080/sentimentChartCategory2", function(data, status){
+	  var ctx = document.getElementById("sentimentChartCategory2").getContext('2d');
+	  var SporChart = new Chart(ctx, {
+		    type: 'pie',
+		    data: {
+		        datasets: [{
+		            data: data.values,
+		            backgroundColor: data.colors
+		        }],
+
+
+		        labels:data.labels
+		    },
+		    options: {
+		        title: {
+		            display: true,
+		            text: 'Spor kategorisinin duygu analizi'
+		        }
+		    }
+
+		});
+	  
+  });
+  
+  
+  $.get("http://localhost:8080/sentimentChartCategory3", function(data, status){
+	  var ctx = document.getElementById("sentimentChartCategory3").getContext('2d');
+	  var EglenceChart = new Chart(ctx, {
+		    type: 'polarArea',
+		    data: {
+		        datasets: [{
+		            data: data.values,
+		            backgroundColor: data.colors,
+		            label: 'Eğlence',
+		            
+		        }],
+
+
+		        labels:data.labels
+		    },
+		    options: {
+		        title: {
+		            display: true,
+		            text: 'Eğlence kategorisinin duygu analizi'
+		        }
+		    }
+
+		});
+	  
+  });
+  
+  $.get("http://localhost:8080/sentimentChartCategory4", function(data, status){
+	  var ctx = document.getElementById("sentimentChartCategory4").getContext('2d');
+	  var SiyasetChart = new Chart(ctx, {
+		    type: 'doughnut',
+		    data: {
+		        datasets: [{
+		            data: data.values,
+		            backgroundColor: data.colors
+		        }],
+
+
+		        labels:data.labels
+		    },
+		    options: {
+		        title: {
+		            display: true,
+		            text: 'Siyaset kategorisinin duygu analizi'
+		        }
+		    }
+
+		});
+	  
+  });
+  
+  $.get("http://localhost:8080/sentimentChartCategory5", function(data, status){
+	  var ctx = document.getElementById("sentimentChartCategory5").getContext('2d');
+	  var SanatChart = new Chart(ctx, {
+		    type: 'polarArea',
+		    data: {
+		        datasets: [{
+		            data: data.values,
+		            backgroundColor: data.colors
+		        }],
+
+
+		        labels:data.labels
+		    },
+		    options: {
+		        title: {
+		            display: true,
+		            text: 'Sanat kategorisinin duygu analizi'
+		        }
+		    }
+
+		});
+	  
+  });
+  $.get("http://localhost:8080/sentimentChartCategory6", function(data, status){
+	  var ctx = document.getElementById("sentimentChartCategory6").getContext('2d');
+	  var EgitimChart = new Chart(ctx, {
+		    type: 'polarArea',
+		    data: {
+		        datasets: [{
+		            data: data.values,
+		            backgroundColor: data.colors
+		        }],
+
+
+		        labels:data.labels
+		    },
+		    options: {
+		        title: {
+		            display: true,
+		            text: 'Eğitim kategorisinin duygu analizi'
+		        }
+		    }
+
+		});
+	  
+  });
+  $.get("http://localhost:8080/sentimentChartCategory7", function(data, status){
+	  var ctx = document.getElementById("sentimentChartCategory7").getContext('2d');
+	  var ElestiriChart = new Chart(ctx, {
+		    type: 'pie',
+		    data: {
+		        datasets: [{
+		            data: data.values,
+		            backgroundColor: data.colors
+		        }],
+
+
+		        labels:data.labels
+		    },
+		    options: {
+		        title: {
+		            display: true,
+		            text: 'Eleştiri kategorisinin duygu analizi'
+		        }
+		    }
+
+		});
+	  
+  });
+  $.get("http://localhost:8080/sentimentChartCategory8", function(data, status){
+	  var ctx = document.getElementById("sentimentChartCategory8").getContext('2d');
+	  var BilimChart = new Chart(ctx, {
+		    type: 'pie',
+		    data: {
+		        datasets: [{
+		            data: data.values,
+		            backgroundColor: data.colors
+		        }],
+
+
+		        labels:data.labels
+		    },
+		    options: {
+		        title: {
+		            display: true,
+		            text: 'Bilim kategorisinin duygu analizi'
+		        }
+		    }
+
+		});
+	  
+  });
+  $.get("http://localhost:8080/sentimentChartCategory0", function(data, status){
+	  var ctx = document.getElementById("sentimentChartCategory0").getContext('2d');
+	  var KapsamDisiChart = new Chart(ctx, {
+		    type: 'polarArea',
+		    data: {
+		        datasets: [{
+		            data: data.values,
+		            backgroundColor: data.colors,
+		            label:'kapsam dışı'
+		        }],
+
+
+		        labels:data.labels
+		    },
+		    options: {
+		        title: {
+		            display: true,
+		            text: 'Kapsam Dışı kategorisinin duygu analizi'
+		        }
+		    }
+
+		});
+	  
+  });
+
+  var takeScreenShot = function() {
+	    html2canvas(document.getElementById("container"), {
+	        onrendered: function (canvas) {
+	            var tempcanvas=document.createElement('canvas');
+	            tempcanvas.width=1000;
+	            tempcanvas.height=2000;
+	            var context=tempcanvas.getContext('2d');
+	            context.drawImage(canvas,0,0,1500,2500,0,0,1000,2000);
+	            var link=document.createElement("a");
+	            link.href=tempcanvas.toDataURL('image/jpg');   //function blocks CORS
+	            link.download = 'screenshot.jpg';
+	            link.click();
+	        }
+	    });
+	}
+  
+  
+
+  
+</script>
+  <br><br>
+  <div class="container">
+  <div th:replace="fragments/footer :: footer"></div>
+  <div class="row" style="margin-top: 50px">
+  </div>
+  </div>
+
+</div>
+</div>
+</body>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+     
+  </head>
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" th:href="@{/}">Anasayfa</a>
+        </div>
+        
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+           <li th:classappend="${module == 'search' ? 'active' : ''}">
+              <a  th:href="@{/twitter/search}">Tweet Ara</a>
+           </li>
+           <li th:classappend="${module == 'kararver' ? 'active' : ''}">
+              <a  th:href="@{/twitter/kararver}">Karar Ver</a>
+           </li>
+           <li th:classappend="${module == 'analiz' ? 'active' : ''}">
+              <a  th:href="@{/twitter/analiz}">Analiz</a>
+           </li>
+           <li th:classappend="${module == 'grafikler' ? 'active' : ''}">
+              <a  th:href="@{/twitter/grafikler}">Grafikler</a>
+           </li>
+           <li th:classappend="${module == 'hakkimda' ? 'active' : ''}">
+              <a  th:href="@{/twitter/hakkimda}">Hakkımda</a>
+           </li>
+          </ul>
+          
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

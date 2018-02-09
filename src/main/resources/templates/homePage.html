@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Home</title>
+ <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body>
+<div class="container">
+<div th:replace="fragments/header :: header"></div>
+<div class="row" style="margin-top: 50px">
+<br><br>
+
+<form th:action="@{/home}" th:object="${homePage}" th:method="GET">
+
+<div class="jumbotron text-center"  >
+
+ <div>
+ <h1 class="text-primary">Tweet Analizi</h1>
+ <p class="text-primary"> Tweetlerin duygu durumunu ve kategorilerini analiz edin </p>
+ <br><br>
+ </div>
+ 
+<div>
+  <dl>
+  <div>
+    <dt class="text-success" >    
+    <h2><a href="search.html" th:href="@{'/twitter/search'}">TWEET ARA</a></h2>
+    </dt>
+  </div>
+    <dd  class="text-success">- İstediğiniz konudaki tweetleri arayın</dd>
+  <div>
+    <dt class="text-info">
+    <h2><a href="kararver.html" th:href="@{'/twitter/kararver'}">KARAR VER</a></h2>
+    </dt>
+  </div>
+    <dd class="text-info">- Bilgisayarı eğitmek için bir kaç ipucu verin </dd>
+  <div>
+    <dt class="text-warning">
+    <h2><a href="analiz.html" th:href="@{'/twitter/analiz'}">ANALİZ ET</a></h2>
+    </dt>
+  </div>
+    <dd class="text-warning">- Analizleri görün </dd>
+  <div>
+    <dt class="text-warning">
+    <h2><a href="grafikler.html" th:href="@{'/twitter/grafikler'}">GRAFİKLER</a></h2>
+    </dt>
+  </div>
+    <dd class="text-info">- Grafiklerileri görün </dd>
+  <div>
+    <dt class="text-warning">
+    <h2><a href="hakkimda.html" th:href="@{'/twitter/hakkimda'}">Hakkımda</a></h2>
+    </dt>
+  </div>
+    <dd class="text-info">- Hakkımda daha fazla bilgi alın </dd>
+    
+  </dl> 
+ </div>
+</div>
+</form>
+</div>
+</div>
+  <div class="container">
+  <div th:replace="fragments/footer :: footer"></div>
+  <div class="row" style="margin-top: 50px">
+  </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>tweet ara</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+
+  <body>
+  <div class="container">
+  <div th:replace="fragments/header :: header"></div>
+  <div class="row" style="margin-top: 50px">
+  <div class="jumbotron text-center">
+    <br>
+    <b>
+    <h1>TWEET ARA</h1>
+    </b><hr>
+    <br>
+  </div>
+  <div class="jumbotron text-center">
+     <form th:action="@{/twitter/hashTag}" th:object="${tweetSearch}" th:method="POST">
+     <p class="text-primary">Kelime Giriniz : <input class="text-primary" type="text" th:field="*{searchKeyword}" placeholder="Kelime giriniz" > </p> 
+     <button type="submit"  class="btn-success"> Getir </button>
+     </form>
+  </div>
+  </div>
+  </div>
+  
+  <br><br>
+  <div class="container">
+  <div th:replace="fragments/footer :: footer"></div>
+  <div class="row" style="margin-top: 50px">
+  </div>
+  </div>
+  
+  </body>
+
+</html>
